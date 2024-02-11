@@ -81,19 +81,31 @@ func getEnvironment() {
 	} else {
 		Cfg.FallbackSocLimit = i
 	}
+	if i, err := GetenvInt("TSC_SPOT_STARTUPDELAY"); err != nil {
+		logger.Printf(ident+" undefined, using default: %d\n", "TSC_SPOT_STARTUPDELAY", Cfg.ChargeSocLimit)
+	} else {
+		Cfg.StartupDelay = i
+	}
 	if b, err := GetenvBool("TSC_SPOT_DEBUG"); err != nil {
-		logger.Printf(ident+" undefined, using default: %d\n", "TSC_SPOT_DEBUG", Cfg.Debug)
+		logger.Printf(ident+" undefined, using default: %t\n", "TSC_SPOT_DEBUG", Cfg.Debug)
 	} else {
 		Cfg.Debug = b
 	}
+	if b, err := GetenvBool("TSC_SPOT_DRYRUN"); err != nil {
+		logger.Printf(ident+" undefined, using default: %t\n", "TSC_SPOT_DRYRUN", Cfg.DryRun)
+	} else {
+		Cfg.DryRun = b
+	}
 
-	logger.Printf(ident+": %s\n", "TSC_SPOT_TESLAMATEAPI_URL", Cfg.Tmapi)
-	logger.Printf(ident+": %s\n", "TSC_SPOT_TSC_URL", Cfg.Tscapi)
-	logger.Printf(ident+": %f\n", "TSC_SPOT_SPOTCHARGEPRICE", Cfg.SpotChargePrice)
-	logger.Printf(ident+": %d\n", "TSC_SPOT_CHECKINTERVAL", Cfg.Checkinterval)
-	logger.Printf(ident+": %d\n", "TSC_SPOT_CARID", Cfg.Carid)
-	logger.Printf(ident+": %d\n", "TSC_SPOT_CHARGESOCLIMIT", Cfg.ChargeSocLimit)
-	logger.Printf(ident+": %d\n", "TSC_SPOT_FALLBACKSOCLIMIT", Cfg.FallbackSocLimit)
-	logger.Printf(ident+": %t\n", "TSC_SPOT_DEBUG", Cfg.Debug)
+	logger.Printf(ident+" %s\n", "TSC_SPOT_TESLAMATEAPI_URL", Cfg.Tmapi)
+	logger.Printf(ident+" %s\n", "TSC_SPOT_TSC_URL", Cfg.Tscapi)
+	logger.Printf(ident+" %f\n", "TSC_SPOT_SPOTCHARGEPRICE", Cfg.SpotChargePrice)
+	logger.Printf(ident+" %d\n", "TSC_SPOT_CHECKINTERVAL", Cfg.Checkinterval)
+	logger.Printf(ident+" %d\n", "TSC_SPOT_CARID", Cfg.Carid)
+	logger.Printf(ident+" %d\n", "TSC_SPOT_CHARGESOCLIMIT", Cfg.ChargeSocLimit)
+	logger.Printf(ident+" %d\n", "TSC_SPOT_FALLBACKSOCLIMIT", Cfg.FallbackSocLimit)
+	logger.Printf(ident+" %d\n", "TSC_SPOT_STARTUPDELAY", Cfg.StartupDelay)
+	logger.Printf(ident+" %t\n", "TSC_SPOT_DEBUG", Cfg.Debug)
+	logger.Printf(ident+" %t\n", "TSC_SPOT_DRYRUN", Cfg.DryRun)
 
 }

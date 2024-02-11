@@ -13,11 +13,13 @@ var (
 		Tmapi:            "http://172.16.1.2:8080",
 		Tscapi:           "http://172.16.1.2:7190",
 		Checkinterval:    300,
-		SpotChargePrice:  0.06,
+		SpotChargePrice:  0.15,
 		Carid:            1,
-		ChargeSocLimit:   95,
+		ChargeSocLimit:   100,
 		FallbackSocLimit: 82,
 		Debug:            false,
+		StartupDelay:     180,
+		DryRun:           false,
 	}
 	PreviousCarSettings = CarConfigurationEntry{}
 	TSCSettings         TSCSettingsEntry
@@ -36,6 +38,8 @@ type Config struct {
 	ChargeSocLimit   int
 	FallbackSocLimit int
 	Debug            bool
+	StartupDelay     int
+	DryRun           bool
 }
 
 func checkPriceLoop(carid int, spotchargeprice float64) {
@@ -61,14 +65,18 @@ func checkPriceLoop(carid int, spotchargeprice float64) {
 			TSCSettings.CarsToManage[settingsCarid].CarState.ChargerActualCurrent)
 		message += ", SpotPrice NOW: %f"
 		if SpotPrice > spotchargeprice {
-			message += "- above charge price of %f."
+			message += " - above charge price of %f."
 			if isCharging(carid) {
-				message += " Stopping charge."
+				if isSpotCharge(carid) {
+					message += " Stopping charge."
+					stopCharge(carid, Cfg.ChargeSocLimit)
+				} else {
+					message += " Charging. Assuming non-spot charge, no action"
+				}
 			}
 			logger.Printf(message, SpotPrice, spotchargeprice)
-			stopCharge(carid, Cfg.ChargeSocLimit)
 		} else {
-			message += "- below charge price of %f."
+			message += " - below charge price of %f."
 			if isCharging(carid) {
 				message += " Charging.\n"
 			} else {
@@ -86,6 +94,9 @@ func checkPriceLoop(carid int, spotchargeprice float64) {
 
 func main() {
 	getEnvironment()
+	logger.Printf("Startup Delay: Sleeping %d seconds\n", Cfg.StartupDelay)
+	time.Sleep(time.Duration(Cfg.StartupDelay) * time.Second)
+
 	if _, success := GetCarConfiguration(Cfg.Carid, true); success == false {
 		logger.Fatalf("Fatal: Unable to get TSC configuration for carid %d\n", Cfg.Carid)
 	}

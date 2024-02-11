@@ -1,4 +1,4 @@
-module tsc-spotpriceloader
+module tsc-spotpricecharger
 
 go 1.21.6
 
