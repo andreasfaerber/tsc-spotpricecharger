@@ -3,8 +3,13 @@ name: Create and publish a Docker image
 # Configures this workflow to run every time a change is pushed to the branch called `release`.
 on:
   push:
-    branches: ['release']
-
+    branches:
+      - 'release'
+    tags:
+      - 'v*'
+  pull_requests:
+    branches:
+      - 'master'
 
 env:
 #  REGISTRY: ghcr.io
@@ -14,11 +19,6 @@ env:
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
-    # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
-    permissions:
-      contents: read
-      packages: write
-      #
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -33,7 +33,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
