@@ -25,7 +25,7 @@ var (
 	TSCSettings         TSCSettingsEntry
 
 	ErrEnvVarEmpty = errors.New("getenv: environment variable empty")
-	logger         = log.New(os.Stdout, "TSC-SPOTPRICECHARGER ", log.Ldate|log.Ltime)
+	logger         = log.New(os.Stdout, "", log.Ldate|log.Ltime)
 )
 
 type Config struct {
