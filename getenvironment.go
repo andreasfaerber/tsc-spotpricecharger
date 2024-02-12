@@ -96,6 +96,11 @@ func getEnvironment() {
 	} else {
 		Cfg.DryRun = b
 	}
+	if s, err := GetenvStr("TZ"); err != nil {
+		logger.Printf(ident+" undefined, using default: %t\n", "TZ", Cfg.DryRun)
+	} else {
+		Cfg.TimeZone = s
+	}
 
 	logger.Printf(ident+" %s\n", "TSC_SPOT_TESLAMATEAPI_URL", Cfg.Tmapi)
 	logger.Printf(ident+" %s\n", "TSC_SPOT_TSC_URL", Cfg.Tscapi)
@@ -107,5 +112,6 @@ func getEnvironment() {
 	logger.Printf(ident+" %d\n", "TSC_SPOT_STARTUPDELAY", Cfg.StartupDelay)
 	logger.Printf(ident+" %t\n", "TSC_SPOT_DEBUG", Cfg.Debug)
 	logger.Printf(ident+" %t\n", "TSC_SPOT_DRYRUN", Cfg.DryRun)
+	logger.Printf(ident+" %s\n", "TZ", Cfg.TimeZone)
 
 }

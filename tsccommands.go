@@ -72,7 +72,8 @@ func stopCharge(carid int, chargelimit int) bool {
 	successful = false
 
 	currentTime := time.Now()
-	TimeToReachLayout := "2006-01-02T15:04:05"
+	//TimeToReachLayout := "2006-01-02T15:04:05"
+	TimeToReachLayout := time.RFC3339
 
 	if !isSpotCharge(carid) {
 		return false

@@ -20,6 +20,7 @@ var (
 		Debug:            false,
 		StartupDelay:     180,
 		DryRun:           false,
+		TimeZone:         "Europe/Berlin",
 	}
 	PreviousCarSettings = CarConfigurationEntry{}
 	TSCSettings         TSCSettingsEntry
@@ -40,6 +41,7 @@ type Config struct {
 	Debug            bool
 	StartupDelay     int
 	DryRun           bool
+	TimeZone         string
 }
 
 func checkPriceLoop(carid int, spotchargeprice float64) {
@@ -71,7 +73,7 @@ func checkPriceLoop(carid int, spotchargeprice float64) {
 					message += " Stopping charge."
 					stopCharge(carid, Cfg.ChargeSocLimit)
 				} else {
-					message += " Charging. Assuming non-spot charge, no action"
+					message += " Charging (and/or climate running). Assuming non-spot charge, no action"
 				}
 			}
 			logger.Printf(message, SpotPrice, spotchargeprice)
