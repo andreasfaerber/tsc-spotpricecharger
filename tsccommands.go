@@ -7,6 +7,7 @@ import (
 	"log"
 	"strconv"
 	"time"
+	_ "time/tzdata"
 )
 
 type CarConfigurationEntry struct {
