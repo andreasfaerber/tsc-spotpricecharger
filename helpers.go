@@ -26,18 +26,18 @@ func isCharging(carid int) bool {
 	return TSCSettings.CarsToManage[sCarId].CarState.ChargerActualCurrent > 0
 }
 
-func shouldCharge(carid int) bool {
+func shouldCharge(carid int) (string, bool) {
 	var sCarId, success = getSettingsCarId(carid)
 	if !success {
-		return false
+		return "Error getting car settings", false
 	}
 	if TSCSettings.CarsToManage[sCarId].CarState.PluggedIn == false {
-		return false
+		return "Not plugged in.", false
 	}
 	if TSCSettings.CarsToManage[sCarId].CarState.SoC >= Cfg.ChargeSocLimit {
-		return false
+		return "SoC Limit below Car SoC.", false
 	}
-	return true
+	return "", true
 }
 
 func isSpotCharge(carid int) bool {
