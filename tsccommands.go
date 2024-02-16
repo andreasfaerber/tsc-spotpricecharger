@@ -27,12 +27,17 @@ func scheduleCharge(carid int, chargelimit int) bool {
 	var PostData CarConfigurationEntry
 	successful = false
 
-	currentTime := time.Now()
+	location, err := time.LoadLocation(Cfg.TimeZone)
+	if err != nil {
+		panic(err)
+	}
+	currentTime := time.Now().UTC().In(location)
 	TimeToReachLayout := "2006-01-02T15:04:05"
 
 	if Cfg.Debug {
 		logger.Printf("futureTime: %s\n", currentTime.Format(TimeToReachLayout))
 	}
+
 	fSeconds := currentTime.Second()
 	fAdd := 59 - fSeconds
 	futureTime := currentTime.Add(10 * time.Minute).Add(time.Duration(fAdd) * time.Second)
