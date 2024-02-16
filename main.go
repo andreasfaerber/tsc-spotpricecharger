@@ -81,6 +81,7 @@ func checkPriceLoop(carid int, spotchargeprice float64) {
 			message += " - below charge price of %f."
 			if isCharging(carid) {
 				message += " Charging.\n"
+				scheduleCharge(carid, Cfg.ChargeSocLimit)
 			} else {
 				if shouldCharge(carid) {
 					message += " Scheduling charge.\n"
@@ -105,3 +106,4 @@ func main() {
 
 	checkPriceLoop(Cfg.Carid, Cfg.SpotChargePrice)
 }
+
