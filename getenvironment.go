@@ -113,5 +113,4 @@ func getEnvironment() {
 	logger.Printf(ident+" %t\n", "TSC_SPOT_DEBUG", Cfg.Debug)
 	logger.Printf(ident+" %t\n", "TSC_SPOT_DRYRUN", Cfg.DryRun)
 	logger.Printf(ident+" %s\n", "TZ", Cfg.TimeZone)
-
 }

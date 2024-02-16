@@ -28,8 +28,7 @@ func scheduleCharge(carid int, chargelimit int) bool {
 	successful = false
 
 	currentTime := time.Now()
-	//TimeToReachLayout := "2006-01-02T15:04:05"
-	TimeToReachLayout := time.RFC3339
+	TimeToReachLayout := "2006-01-02T15:04:05"
 
 	if Cfg.Debug {
 		logger.Printf("futureTime: %s\n", currentTime.Format(TimeToReachLayout))
