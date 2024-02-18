@@ -10,13 +10,13 @@ import (
 
 var (
 	Cfg = Config{
-		Tmapi:            "http://172.16.1.2:8080",
-		Tscapi:           "http://172.16.1.2:7190",
+		Tmapi:            "http://teslamateapi:8080",
+		Tscapi:           "http://teslasolarcharger:7190",
 		Checkinterval:    300,
-		SpotChargePrice:  0.15,
+		SpotChargePrice:  0.06,
 		Carid:            1,
-		ChargeSocLimit:   100,
-		FallbackSocLimit: 82,
+		ChargeSocLimit:   90,
+		FallbackSocLimit: 90,
 		Debug:            false,
 		StartupDelay:     180,
 		DryRun:           false,

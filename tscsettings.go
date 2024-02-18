@@ -160,7 +160,7 @@ func getSettingsCarId(carid int) (int, bool) {
 		}
 	}
 	if Cfg.Debug {
-		logger.Printf("getSettingsCardId, CardID: %d, settingsCardid != -1: %t\n", carid, settingsCarid != -1)
+		logger.Printf("getSettingsCardId, CardID: %d, settingsCarid != -1: %t\n", carid, settingsCarid != -1)
 	}
 	return settingsCarid, settingsCarid != -1
 }
