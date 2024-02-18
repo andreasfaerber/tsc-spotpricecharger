@@ -49,7 +49,7 @@ func getEnvironment() {
 	if s, err := GetenvStr("TSC_SPOT_TESLAMATEAPI_URL"); err != nil {
 		logger.Printf(ident+" undefined, using default: %s\n", "TSC_SPOT_TESLAMATEAPI_URL", Cfg.Tmapi)
 	} else {
-		logger.Printf(ident+" read: %s", s)
+		logger.Printf(ident+" read: %s", "TSC_SPOT_TESLAMATEAPI_URL", s)
 		Cfg.Tmapi = s
 	}
 	if s, err := GetenvStr("TSC_SPOT_TSC_URL"); err != nil {
