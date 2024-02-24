@@ -35,7 +35,7 @@ func shouldCharge(carid int) (string, bool) {
 		return "Not plugged in.", false
 	}
 	if TSCSettings.CarsToManage[sCarId].CarState.SoC >= Cfg.ChargeSocLimit {
-		return "SoC Limit below Car SoC.", false
+		return "SoC Limit below Car SoC. Not charging (anymore)", false
 	}
 	return "", true
 }
