@@ -28,8 +28,8 @@ To use it just add it to the docker-compose.yml of your Teslamate installation. 
 
 | Variable | Default               | Description           |
 |----------|-----------------------|-----------------------|
-| TSC_SPOT_TSC_URL | http://localhost:8080 | TeslaSolarCharger URL |
-| TSC_SPOT_TESLAMATEAPI_URL | http://localhost      | Teslamate API URL |     
+| TSC_SPOT_TSC_URL | http://teslasolarcharger:7190 | TeslaSolarCharger URL |
+| TSC_SPOT_TESLAMATEAPI_URL | http://teslamateapi:8080      | Teslamate API URL |     
 | TSC_SPOT_SPOTCHARGEPRICE | 0.06                  | Spot price under which charging should charge. Raw spot price without any additional price components |
 | TSC_SPOT_CHECKINTERVAL | 300                   | Interval in seconds to check for spot price and if charging should start / stop. |
 | TSC_SPOT_CARID | 1                     | Car ID in TeslaSolarCharger to initiate charging for when spot price falls below TSC_SPOT_SPOTCHARGEPRICE |
