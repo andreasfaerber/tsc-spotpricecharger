@@ -45,8 +45,8 @@ func isSpotCharge(carid int) bool {
 	if !success {
 		return false
 	}
-	//timeStampLayout := "2006-01-02T15:04:05"
-	timeStampLayout := time.RFC3339
+	timeStampLayout := "2006-01-02T15:04:05"
+	//timeStampLayout := time.RFC3339
 	timeLatestTimeToReachSoC := TSCSettings.CarsToManage[sCarId].CarConfiguration.LatestTimeToReachSoC
 	latestTimeToReachSoC, err := time.Parse(timeStampLayout, timeLatestTimeToReachSoC)
 	if err != nil {
