@@ -35,6 +35,7 @@ func GetSpotPrice() (float64, bool) {
 	}
 
 	SpotPriceDateLayout := "2006-01-02T15:04:05"
+	SpotPriceDateLayout2 := "2006-01-02T15:04:05Z"
 	//SpotPriceDateLayout := time.RFC3339
 
 	//SpotCount++
@@ -47,9 +48,18 @@ func GetSpotPrice() (float64, bool) {
 
 	for _, entry := range SpotPrices {
 		StartDate, err := time.ParseInLocation(SpotPriceDateLayout, entry.StartDate, location)
+		if err != nil {
+			StartDate, err = time.ParseInLocation(SpotPriceDateLayout2, entry.StartDate, location)
+			if err != nil {
+				panic(err)
+			}
+		}
 		EndDate, err := time.ParseInLocation(SpotPriceDateLayout, entry.EndDate, location)
 		if err != nil {
-			panic(err)
+			EndDate, err = time.ParseInLocation(SpotPriceDateLayout2, entry.EndDate, location)
+			if err != nil {
+				panic(err)
+			}
 		}
 		if currentTime.After(StartDate) &&
 			currentTime.Before(EndDate) {
