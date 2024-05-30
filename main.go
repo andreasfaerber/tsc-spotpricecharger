@@ -60,11 +60,11 @@ func checkPriceLoop(carid int, spotchargeprice float64) {
 		}
 		message := fmt.Sprintf("Car %d, PluggedIn: %t, SoC: %d, SocLimit (SpotCharge): %d, SoCLimit (Car): %d,"+
 			" ChargerActualCurrent: %d", carid,
-			TSCSettings.CarsToManage[settingsCarid].CarState.PluggedIn,
-			TSCSettings.CarsToManage[settingsCarid].CarState.SoC,
+			TSCSettings.CarsToManage[settingsCarid].PluggedIn,
+			TSCSettings.CarsToManage[settingsCarid].SoC,
 			Cfg.ChargeSocLimit,
-			TSCSettings.CarsToManage[settingsCarid].CarState.SocLimit,
-			TSCSettings.CarsToManage[settingsCarid].CarState.ChargerActualCurrent)
+			TSCSettings.CarsToManage[settingsCarid].SocLimit,
+			TSCSettings.CarsToManage[settingsCarid].ChargerActualCurrent)
 		message += ", SpotPrice NOW: %f"
 		if SpotPrice > spotchargeprice {
 			message += " - above charge price of %f."

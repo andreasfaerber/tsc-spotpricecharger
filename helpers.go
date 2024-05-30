@@ -13,7 +13,7 @@ func isCharging(carid int) bool {
 		}
 		return false // better panic?
 	}
-	if TSCSettings.CarsToManage[sCarId].CarState.PluggedIn == false {
+	if TSCSettings.CarsToManage[sCarId].PluggedIn == false {
 		if Cfg.Debug {
 			logger.Printf("isCharging, returning false\n")
 		}
@@ -21,9 +21,9 @@ func isCharging(carid int) bool {
 	}
 	if Cfg.Debug {
 		logger.Printf("isCharging, returning %t\n",
-			TSCSettings.CarsToManage[sCarId].CarState.ChargerActualCurrent > 0)
+			TSCSettings.CarsToManage[sCarId].ChargerActualCurrent > 0)
 	}
-	return TSCSettings.CarsToManage[sCarId].CarState.ChargerActualCurrent > 0
+	return TSCSettings.CarsToManage[sCarId].ChargerActualCurrent > 0
 }
 
 func shouldCharge(carid int) (string, bool) {
@@ -31,10 +31,10 @@ func shouldCharge(carid int) (string, bool) {
 	if !success {
 		return "Error getting car settings", false
 	}
-	if TSCSettings.CarsToManage[sCarId].CarState.PluggedIn == false {
+	if TSCSettings.CarsToManage[sCarId].PluggedIn == false {
 		return "Not plugged in.", false
 	}
-	if TSCSettings.CarsToManage[sCarId].CarState.SoC >= Cfg.ChargeSocLimit {
+	if TSCSettings.CarsToManage[sCarId].SoC >= Cfg.ChargeSocLimit {
 		return "SoC Limit below Car SoC. Not charging (anymore)", false
 	}
 	return "", true
@@ -47,7 +47,7 @@ func isSpotCharge(carid int) bool {
 	}
 	//timeStampLayout := "2006-01-02T15:04:05"
 	timeStampLayout := time.RFC3339
-	timeLatestTimeToReachSoC := TSCSettings.CarsToManage[sCarId].CarConfiguration.LatestTimeToReachSoC
+	timeLatestTimeToReachSoC := TSCSettings.CarsToManage[sCarId].LatestTimeToReachSoC
 	latestTimeToReachSoC, err := time.Parse(timeStampLayout, timeLatestTimeToReachSoC)
 	if err != nil {
 		fmt.Printf("isSpotCharge, Error: %+v\n", err)
