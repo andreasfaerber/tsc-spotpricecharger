@@ -1,5 +1,10 @@
 # tsc-spotpricecharger
 
+Important: Due to updates in TeslaSolarCharger the spotpricecharger currently does not work as before. I am looking
+into the required changes to adopt to those changes. Until then it's best to disable the spotpricecharger.
+
+
+
 Docker container to be added to an existing [Teslamate](https://docs.teslamate.org/) and
 [TeslaSolarCharger](https://github.com/pkuehnel/TeslaSolarCharger). It can initiate car charging (via
 TeslaSolarCharger) based on spot price (below a certain limit) up to defined state of charge (SoC) limit.
